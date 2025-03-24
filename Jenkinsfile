@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'add here your url', credentialsId: 'add credentialsId'
+                git url: 'https://github.com/stbestichhh/it-management-lab2.git', credentialsId: 'github'
             }
         }
         
@@ -12,7 +12,7 @@ pipeline {
             steps {
                 // Крок для збірки проекту з Visual Studio
                 // Встановіть правильні шляхи до рішення/проекту та параметри MSBuild
-                bat '"path to MSBuild" test_repos.sln /t:Build /p:Configuration=Release'
+                bat '"C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin" test_repos.sln /t:Build /p:Configuration=Release'
             }
         }
 
@@ -25,9 +25,11 @@ pipeline {
     }
 
     post {
-    always {
+      always {
         // Publish test results using the junit step
-         // Specify the path to the XML test result files
+         // Specify the path to the XML test result Files\Microsoft
+        junit '"Z:\vs_mkr_test1\test_report.xml"'
+      }
     }
-}
+  }
 }
